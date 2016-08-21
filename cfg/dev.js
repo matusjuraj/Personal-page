@@ -3,6 +3,7 @@
 let path = require('path');
 let webpack = require('webpack');
 let baseConfig = require('./base');
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let defaultSettings = require('./defaults');
 
 // Add needed plugins here
@@ -21,7 +22,8 @@ let config = Object.assign({}, baseConfig, {
     new webpack.NoErrorsPlugin(),
     new BowerWebpackPlugin({
       searchResolveModulesDirectories: false
-    })
+    }),
+    new ExtractTextPlugin("bundle.css")
   ],
   module: defaultSettings.getDefaultModules()
 });

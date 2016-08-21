@@ -10,6 +10,8 @@ const path = require('path');
 const srcPath = path.join(__dirname, '/../src');
 const dfltPort = 8000;
 
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 /**
  * Get the default modules object for webpack
  * @return {Object}
@@ -20,29 +22,33 @@ function getDefaultModules() {
       {
         test: /\.(js|jsx)$/,
         include: srcPath,
-        loader: 'eslint-loader'
+        loader: 'source-map-loader'
       }
     ],
     loaders: [
       {
+        test: /\.(ts|tsx)$/,
+        loader: 'ts-loader'
+      },
+      {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        loader: ExtractTextPlugin.extract("style", "css")
       },
       {
         test: /\.sass/,
-        loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+        loader: ExtractTextPlugin.extract("style", "css!sass")
       },
       {
         test: /\.scss/,
-        loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+        loader: ExtractTextPlugin.extract("style", "css!sass")
       },
       {
         test: /\.less/,
-        loader: 'style-loader!css-loader!less-loader'
+        loader: ExtractTextPlugin.extract("style", "css!less")
       },
       {
         test: /\.styl/,
-        loader: 'style-loader!css-loader!stylus-loader'
+        loader: ExtractTextPlugin.extract("style", "css!stylus")
       },
       {
         test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg)$/,

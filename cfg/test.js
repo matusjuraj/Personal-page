@@ -1,6 +1,7 @@
 'use strict';
 
 let path = require('path');
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let srcPath = path.join(__dirname, '/../src/');
 
 let baseConfig = require('./base');
@@ -53,6 +54,7 @@ module.exports = {
   plugins: [
     new BowerWebpackPlugin({
       searchResolveModulesDirectories: false
-    })
+    }),
+    new ExtractTextPlugin("bundle.css")
   ]
 };
